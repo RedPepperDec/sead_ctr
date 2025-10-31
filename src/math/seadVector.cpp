@@ -1,4 +1,4 @@
-#include <sead/math/seadVector.h>
+#include <math/seadVector.h>
 
 namespace sead {
 template <>

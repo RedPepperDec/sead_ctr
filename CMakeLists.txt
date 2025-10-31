@@ -39,13 +39,12 @@ endif()
 __compiler_armcc(C)
 __compiler_armcc(CXX)
 
-file(GLOB_RECURSE SOURCES src/*.c src/*.cpp)
+file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 
 add_library(sead ${SOURCES})
 
-target_include_directories(sead PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../nnsdk/include)
+target_include_directories(sead PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../ctrsdk/include)
 target_include_directories(sead PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-target_compile_definitions(sead PUBLIC NON_MATCHING=)
 
 target_compile_options(sead PUBLIC $<$<COMPILE_LANGUAGE:CXX>:--apcs=//interwork --arm --cpp>)
 target_compile_options(sead PUBLIC $<$<COMPILE_LANGUAGE:CXX>:--cpu=MPCore --fpmode=fast --force_new_nothrow>)

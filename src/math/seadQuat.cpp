@@ -1,4 +1,4 @@
-#include <sead/math/seadQuat.h>
+#include <math/seadQuat.h>
 
 namespace sead {
 

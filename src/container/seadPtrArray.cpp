@@ -1,4 +1,4 @@
-#include <sead/container/seadPtrArray.h>
+#include <container/seadPtrArray.h>
 
 namespace sead {
 
@@ -19,7 +19,7 @@ void PtrArrayImpl::setBuffer(s32 ptrNumMax, void* buf) {
     mPtrNum = ptrNumMax;
 }
 
-NON_MATCHING
+#ifdef NON_MATCHING
 
 // ip garbage
 void PtrArrayImpl::erase(s32 pos, s32 count) {
@@ -44,5 +44,5 @@ void PtrArrayImpl::erase(s32 pos, s32 count) {
 
     mPtrNumMax -= count;
 }
-
+#endif
 }  // namespace sead

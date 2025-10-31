@@ -1,4 +1,4 @@
-#include <sead/heap/seadHeapMgr.h>
+#include <heap/seadHeapMgr.h>
 
 namespace sead {
 
