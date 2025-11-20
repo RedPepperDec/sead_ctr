@@ -6,35 +6,23 @@ set_toolchain()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-project(sead C CXX)
+add_subdirectory(../ctrsdk ../../build)
 
-if (WIN32)
-    set(LOCALE_FLAG --locale=japanese)
-else()
-    set(LOCALE_FLAG --locale=ja_JP.SJIS)
-endif()
+project(sead C CXX)
 
 __compiler_armcc(C)
 __compiler_armcc(CXX)
 
-file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+file(GLOB_RECURSE SOURCES_MOD ${CMAKE_CURRENT_SOURCE_DIR}/modules/src/*.c ${CMAKE_CURRENT_SOURCE_DIR}/modules/src/*.cpp)
+file(GLOB_RECURSE SOURCES_ADD ${CMAKE_CURRENT_SOURCE_DIR}/addins/*/src/*.c ${CMAKE_CURRENT_SOURCE_DIR}/addins/*/src/*.cpp)
 
-add_library(sead ${SOURCES})
+add_library(sead ${SOURCES_MOD} ${SOURCES_ADD})
 
-target_include_directories(sead PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../ctrsdk/include)
+target_link_libraries(sead PUBLIC ctrsdk)
+
+target_include_directories(sead PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../ctrsdk/include)
 target_include_directories(sead PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(sead PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/addins/libms/include)
+target_include_directories(sead PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/modules/include)
 
-target_compile_options(sead PUBLIC
-    --apcs=//interwork --arm
-    --cpu=MPCore --fpmode=fast -Otime
-    --data-reorder --split_sections
-    --multibyte-chars --signed_chars
-    ${LOCALE_FLAG}
-)
-target_compile_options(sead PUBLIC $<$<COMPILE_LANGUAGE:C>:--c99>)
-target_compile_options(sead PUBLIC $<$<COMPILE_LANGUAGE:CXX>:
-    --cpp --force_new_nothrow --no_vfe
-    --no_exceptions --no_rtti --no_rtti_data
-    -O3 --forceinline
->)
-
+target_compile_definitions(sead PUBLIC SEAD_COMPILEOPT_USE_NW4C)
