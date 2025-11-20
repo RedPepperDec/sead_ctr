@@ -4,3 +4,6 @@
 [submodule "project"]
 	path = project
 	url = https://github.com/RedPepperDec/RedPepper_Meta
+[submodule "addins/libms"]
+	path = addins/libms
+	url = https://github.com/RedPepperDec/libms_ctr

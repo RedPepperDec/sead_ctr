@@ -6,7 +6,7 @@ set_toolchain()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_subdirectory(../ctrsdk ../../build)
+add_subdirectory(../CTRSDK ../../build)
 
 project(sead C CXX)
 
@@ -18,9 +18,9 @@ file(GLOB_RECURSE SOURCES_ADD ${CMAKE_CURRENT_SOURCE_DIR}/addins/*/src/*.c ${CMA
 
 add_library(sead ${SOURCES_MOD} ${SOURCES_ADD})
 
-target_link_libraries(sead PUBLIC ctrsdk)
+target_link_libraries(sead PUBLIC sdk)
 
-target_include_directories(sead PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../ctrsdk/include)
+target_include_directories(sead PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../sdk/include)
 target_include_directories(sead PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_include_directories(sead PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/addins/libms/include)
 target_include_directories(sead PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/modules/include)

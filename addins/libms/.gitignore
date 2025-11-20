@@ -1,9 +1,0 @@
-Build/
-__pycache__/
-.cache/
-CMakeFiles/
-Makefile
-cmake_install.cmake
-*.a
-
-compile_commands.json
